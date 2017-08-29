@@ -781,7 +781,8 @@ ul.dropdown-menu {
 .profile_details ul li ul.dropdown-menu.drp-mnu {
     padding: 1em;
     min-width: 190px;
-    top: 122%;
+    top: 132%;
+    border-top:none;
     left:0%;
 }
 ul.dropdown-menu.drp-mnu li {
