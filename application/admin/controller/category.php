@@ -1,7 +1,7 @@
 <?php
 namespace app\admin\controller;
 use think\Controller;
-class Category extends Controller
+class category extends Controller
 {
     public function index()
     {
