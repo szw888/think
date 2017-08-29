@@ -18,6 +18,8 @@ return [
     'app_namespace'          => 'app',
     // 应用调试模式
     'app_debug'              => true,
+    //url模式
+    'URL_MODEL'              => 2,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
