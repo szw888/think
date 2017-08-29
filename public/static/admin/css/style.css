@@ -92,7 +92,7 @@ button#showLeftPush:hover {
 	position: fixed;
 }
 .cbp-spmenu-vertical {
-    width: 309px;
+    width: 233px;
     height: 100%;
     top: 76px;
     z-index: 1000;
@@ -122,7 +122,7 @@ button#showLeftPush:hover {
 	transition: all 0.3s ease;
 }
 .cbp-spmenu-push div#page-wrapper {
-    margin: 0em 0 0 19.3em;
+    margin: 0em 0 0 14.7em;
 	transition:.5s all;
 	-webkit-transition:.5s all;
 	-moz-transition:.5s all;
