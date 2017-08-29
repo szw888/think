@@ -1298,9 +1298,9 @@ section#tables  p {
 }
 /*--//Typography--*/
 /*--table--*/
-.tables h4 {
+.tit {
     font-size: 1.4em;
-    margin-bottom: 1em;
+    margin-bottom: 2em  !important;
     color: #777777;
 }
 .tables .panel-body ,.tables .bs-example{
@@ -1312,6 +1312,7 @@ section#tables  p {
 }
 .bs-example {
     margin-top: 2em;
+    padding: 2em 2em 0.5em;
 }
 .table-hover > tbody > tr:hover {
     background-color: #E8E6E6;
