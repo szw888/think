@@ -17,9 +17,9 @@ return [
     // 数据库名
     'database'        => 'shop',
     // 用户名
-    'username'        => 'szw',
+    'username'        => 'root',
     // 密码
-    'password'        => 'zxc4268',
+    'password'        => '123456',
     // 端口
     'hostport'        => '',
     // 连接dsn
