@@ -7,6 +7,11 @@ class Cate extends Controller
     //分类----列表
     public function index()
     {
+
+        //获取分类数据
+        $cateData = db('Cate')->select();
+        $this->assign('cateData',$cateData);
+
         return $this->fetch();
     }
     //分类----添加
@@ -29,6 +34,9 @@ class Cate extends Controller
                 }
             }
         }else{
+            //添加分类页面获取分类数据
+            $cateData = db('Cate')->select();
+            $this->assign('cateData',$cateData);
             return $this->fetch();
         }
 

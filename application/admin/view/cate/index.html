@@ -31,27 +31,18 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Table heading</th>
-                        <th>Table heading</th>
+                        <th>分类名称</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
+                {foreach name="cateData" item="vo"}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
+                    <th scope="row">{$vo.id}</th>
+                    <td>{$vo.cate_name}</td>
+                    <td>删除</td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Table cell</td>
-                    <td>Table cell</td>
-
-                </tr>
+                {/foreach}
                 </tbody>
             </table>
         </div>
