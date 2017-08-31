@@ -59,13 +59,19 @@ class Cate extends Controller
         if(request()->isPost()){
             $cateid = input('post.cid');
             $data = ['cate_name'=>input('post.cate_name'),'parent_id'=>input('post.parent_id')];
-
-            $res = db('Cate')->where('id',$cateid)->update($data);
-            if($res!==false){
-                $this->success('修改成功','Cate/index');
+            //表单验证
+            $validate = Loader::validate('Cate');
+            if(!$validate->check($data)){
+                $this->error($validate->getError());
             }else{
-                $this->error('修改失败');
+                $res = db('Cate')->where('id',$cateid)->update($data);
+                if($res!==false){
+                    $this->success('修改成功','Cate/index');
+                }else{
+                    $this->error('修改失败');
+                }
             }
+
         }
         //获取所有分类数据
         $cateData = model('Cate')->getTree();
@@ -79,8 +85,19 @@ class Cate extends Controller
             }
         }
 
-
         return $this->fetch();
+
+    }
+
+    //分类排序
+    public function sort(){
+        $data = input('post.');
+        $res = model('Cate')->update(['id' => $data['cid'], 'list_order' => $data['val']]);
+        if($res){
+            echo json_encode(['code'=>1,'msg'=>'更新成功']);
+        }else{
+            echo json_encode(['code'=>-1,'msg'=>'更新失败']);
+        }
 
     }
 }
