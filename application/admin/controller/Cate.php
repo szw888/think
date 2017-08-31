@@ -7,9 +7,10 @@ class Cate extends Controller
     //分类----列表
     public function index()
     {
-
+        header("Content-type: text/html; charset=utf-8");
         //获取分类数据
-        $cateData = db('Cate')->select();
+
+        $cateData = model('Cate')->getTree();
         $this->assign('cateData',$cateData);
 
         return $this->fetch();
@@ -18,24 +19,22 @@ class Cate extends Controller
     public function add()
     {
         if(request()->isPost()){
-
-            $data = input();//获取表单提交的分类数据
+            $data = input('post.');//获取表单提交的分类数据
             //验证表单提交的数据
             $validate = Loader::validate('Cate');
-
             if(!$validate->check($data)){
                 $this->error($validate->getError());
             }else{
-                $res = db('Cate')->insert($data);
-                if($res){
+                $res = model('Cate')->add($data);
+                if($res)
                     $this->success('添加成功',url('cate/index'));
-                }else{
+                else
                     $this->error('添加失败');
-                }
+
             }
         }else{
             //添加分类页面获取分类数据
-            $cateData = db('Cate')->select();
+            $cateData = model('Cate')->getTree();
             $this->assign('cateData',$cateData);
             return $this->fetch();
         }

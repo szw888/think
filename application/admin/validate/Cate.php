@@ -5,7 +5,7 @@ use think\Validate;
 class Cate extends Validate
 {
     protected $rule = [
-        'cate_name'  =>  'require|max:10',
+        'cate_name'  =>  'require|max:20',
     ];
     protected $message  =   [
         'cate_name.require' => '请填写分类名称',

@@ -39,8 +39,12 @@
                 {foreach name="cateData" item="vo"}
                 <tr>
                     <th scope="row">{$vo.id}</th>
-                    <td>{$vo.cate_name}</td>
-                    <td>删除</td>
+                    <td>{:str_repeat('|____',$vo['level'])}{$vo.cate_name}</td>
+                    <td>
+                        <a href="#"><span class="label label-danger">删除</span></a>
+                        <a href="#"><span class="label label-primary">修改</span></a>
+                    </td>
+
                 </tr>
                 {/foreach}
                 </tbody>
