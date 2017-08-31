@@ -52,4 +52,35 @@ class Cate extends Controller
             echo json_encode($arr);
         }
     }
+
+    // 分类修改
+    public function edit(){
+
+        if(request()->isPost()){
+            $cateid = input('post.cid');
+            $data = ['cate_name'=>input('post.cate_name'),'parent_id'=>input('post.parent_id')];
+
+            $res = db('Cate')->where('id',$cateid)->update($data);
+            if($res!==false){
+                $this->success('修改成功','Cate/index');
+            }else{
+                $this->error('修改失败');
+            }
+        }
+        //获取所有分类数据
+        $cateData = model('Cate')->getTree();
+        $this->assign('cateData',$cateData);
+
+        $cid = input('param.cid');//分类id
+        if($cid) {
+            $saved = db('Cate')->where('id', $cid)->find();
+            if($cateData){
+                $this->assign('saved',$saved);
+            }
+        }
+
+
+        return $this->fetch();
+
+    }
 }
