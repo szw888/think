@@ -40,4 +40,16 @@ class Cate extends Controller
         }
 
     }
+    //分类删除
+    public function del(){
+        $cid = input('post.cid');
+        $res = db('Cate')->delete($cid);
+        if($res){
+            $arr = ['code'=>1,'msg'=>'删除成功'];
+            echo json_encode($arr);
+        }else{
+            $arr = ['code'=>0,'msg'=>'删除失败'];
+            echo json_encode($arr);
+        }
+    }
 }
