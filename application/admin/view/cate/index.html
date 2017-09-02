@@ -27,12 +27,14 @@
     <div id="page-wrapper">
         <div class="table-responsive bs-example widget-shadow">
             <h4 class = "tit">分类列表</h4>
+            <img style="margin:20px" width="280" height="140" src="{:url('Cate/map')}" />
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>分类名称</th>
                         <th>排序</th>
+                        <th>状态</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -44,12 +46,12 @@
                     <td>
                         <input type="text" name = "sort" onchange = "updateSort({$vo.id},this.value);" class="form-control" value="{$vo['list_order']}"  style = "width:auto !important;">
                     </td>
-
+                    <td><a href="javascript:void(0);" onclick = "status({$vo['id']},{$vo['status']} ? 0 : 1);" >{if condition = "$vo['status'] eq 1"}<span class="label label-primary">正常</span>{else/}<span class="label label-danger">待审</span>{/if}</a></td>
                     <td>
                         <a href = "{:url('Cate/edit',['cid'=>$vo.id])}">
                             <span class="label label-primary"><i class = "glyphicon glyphicon-edit"></i>&nbsp;修改</span>
                         </a>
-                        <a href = "javascript:void(0);" onclick=del({$vo.id});>
+                        <a href = "javascript:void(0);" onclick="status({$vo.id},-1)";>
                             <span class="label label-danger"><i class = "glyphicon glyphicon-remove"></i>&nbsp;删除</span>
                         </a>
                     </td>
@@ -68,26 +70,7 @@
 <script src="__STATIC__/admin/js/bootstrap.js"> </script>
 <script src="__STATIC__/admin/js/common.js"> </script>
 <script>
-    /***********删除************/
-    function del($cid){
-           if(confim()){
-               $.ajax({
-                   url:"{:url('Cate/del')}",
-                   dataType:"json",
-                   type:"post",
-                   data:{'cid':$cid},
-                   success:function(res){
-                       if(res.code==1){
-                           alert(res.msg);
-                           location.reload();
-                       }else{
-                           alert(res.msg);
-                       }
-                   }
-               });
-           }
 
-    }
 
     /***********排序************/
     function updateSort(cid,val){
@@ -107,6 +90,27 @@
             }
         });
     }
+    /***********修改状态*************/
+
+        function status($cid, $status) {
+            if(confim()) {
+                $.ajax({
+                    url: "{:url('Cate/status')}",
+                    dataType: 'json',
+                    type: 'post',
+                    data: {'cid': $cid, 'status': $status},
+                    success: function (res) {
+                        if (res.code == 1) {
+                            alert(res.msg);
+                            location.reload();
+                        } else {
+                            alert(res.msg);
+                        }
+                    }
+                });
+            }
+        }
+
 </script>
 </body>
 </html>

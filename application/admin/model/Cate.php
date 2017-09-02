@@ -14,7 +14,7 @@ class Cate extends Model
     //获取分类层级树
     public function getTree()
     {
-        $cateData = $this->order('list_order')->select();
+        $cateData = $this->where(array('status'=>array('neq',-1)))->order('list_order')->select();
         return $this->_getTree($cateData,$pid = 0,$level = 0);
     }
     private function _getTree($data,$pid,$level){

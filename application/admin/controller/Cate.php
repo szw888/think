@@ -10,11 +10,19 @@ class Cate extends Controller
         header("Content-type: text/html; charset=utf-8");
         //获取分类数据
 
+
         $cateData = model('Cate')->getTree();
         $this->assign('cateData',$cateData);
 
         return $this->fetch();
     }
+    public function map(){
+        $mp = new \Map();
+        $res = $mp->getimg();
+        return $res;
+
+    }
+
     //分类----添加
     public function add()
     {
@@ -99,5 +107,17 @@ class Cate extends Controller
             echo json_encode(['code'=>-1,'msg'=>'更新失败']);
         }
 
+    }
+
+    //修改状态
+    public function status(){
+        $data = input('post.');
+
+       $res = model('Cate')->update(['id' => $data['cid'], 'status' => $data['status']]);
+       if($res){
+           $this->result(['code'=>1,'msg'=>'操作成功']);
+       }else{
+           $this->result(['code'=>-1,'msg'=>'操作失败']);
+       }
     }
 }
