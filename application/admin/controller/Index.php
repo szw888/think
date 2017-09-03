@@ -6,10 +6,8 @@ class Index extends Controller
 {
     public function index()
     {
-        vendor('phpmailer.Email');
-        $email = new \Email();
-        $email->send('1','1','1');
-
+        $a = send('2','2','2');
+        dump($a);exit;
         return $this->fetch();
     }
 }
