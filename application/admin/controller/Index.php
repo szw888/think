@@ -1,6 +1,6 @@
 <?php
 namespace app\admin\controller;
-use phpmailer\email;
+use phpmailer;
 use think\Controller;
 
 class Index extends Controller
