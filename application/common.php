@@ -34,7 +34,8 @@ function doCurl($url,$type=0,$data=''){
 
 
 function send($to,$title,$body){
-    vendor('phpmailer.PHPMailer');
+    import("phpmailer.phpmailer");
+
     $mail = new \PHPMailer();
     $mail->IsSMTP();
     $mail->CharSet='UTF-8'; //设置邮件的字符编码，这很重要，不然中文乱码
