@@ -8,6 +8,15 @@ class Base extends Model{
         $data['status'] = 1;
         return $this->save($data);
     }
+    //通过一级的 id 获取二级数据
+    public function getSecondByfirst($firstId){
+        $where = [
+            'parent_id'    =>$firstId,
+            'status'=>1
+        ];
+        $res = $this->where($where)->select();
+        return $res;
+    }
     //获取分类层级树
     public function getTree()
     {

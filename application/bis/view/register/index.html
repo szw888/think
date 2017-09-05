@@ -38,10 +38,13 @@
                 <h4>所属城市* :</h4>
             </div>
             <div class="sign-up2" style = "padding:10px 0;">
-                <select name="selector1" id="selector1" style = "width:30%;" class="form-control1">
+                <select name="" id="selector1" style = "width:30%;" class="form-control1" onchange = "getSecond(this.value,1);">
                     <option>&nbsp;----请选择----  </option>
+                    {foreach name = 'firstCity' item = 'vo'}
+                    <option value = "{$vo['id']}" >{$vo['city_name']}</option>
+                    {/foreach}
                 </select>
-                <select name="selector1" id="selector2" style = "width:30%;"class="form-control1">
+                <select name="selector1" id="secondCity" style = "width:30%;"class="form-control1">
                     <option>&nbsp;----请选择----  </option>
                 </select>
             </div>
@@ -152,8 +155,11 @@
                 <h4>所属分类* :</h4>
             </div>
             <div class="sign-up2" style = "padding:20px 0;">
-                <select name="selector1" id="selector3" class="form-control1">
+                <select name="selector1" id="selector3" class="form-control1"  onchange = "getSecond(this.value,2);">
                     <option>---请选择---</option>
+                    {foreach name = 'firstCate' item = 'vo'}
+                    <option value = "{$vo['id']}" >{$vo['cate_name']}</option>
+                    {/foreach}
                 </select>
             </div>
             <div class="clearfix"> </div>
@@ -163,7 +169,7 @@
                 <h4>所属子类* :</h4>
             </div>
             <div class="sign-up2" style = "padding:20px 0;">
-                <select name="selector1" id="selector4" class="form-control1">
+                <select name="selector1" id="secondCate" class="form-control1">
                     <option>---请选择---</option>
                 </select>
             </div>
@@ -228,6 +234,9 @@
 <script type="text/javascript" charset="utf-8" src="__STATIC__/admin/Ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="__STATIC__/admin/Ueditor/ueditor.all.min.js"> </script>
 <script type="text/javascript" charset="utf-8" src="__STATIC__/admin/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/admin/js/common.js"></script>
+<script>$url = "{:url('bis/register/getSecond')}";</script>
 <script> UE.getEditor('bis_desc');UE.getEditor('location_desc');</script>
+
 </body>
 </html>
