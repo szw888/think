@@ -18,5 +18,5 @@ return [
         '__dir__'    => [ 'controller', 'model', 'view'],
         'controller' => ['Login', 'Register'],
     ],
-    // 其他更多的模块定义
+
 ];

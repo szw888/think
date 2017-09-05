@@ -1,7 +1,11 @@
 <?php
 namespace app\bis\controller;
 
-class Register
-{
+use think\Controller;
 
+class Register extends Controller
+{
+    public function index(){
+        return $this->fetch();
+    }
 }

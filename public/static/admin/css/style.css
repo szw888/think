@@ -1366,7 +1366,7 @@ section#tables  p {
 }
 /* --  general forms  -- */
 .form-control1, .form-control_2.input-sm{
-  border: 1px solid #ccc;
+  *border: 1px solid #ccc;
   padding: 5px 8px;
   color: #616161;
   background: #fff;
@@ -1602,7 +1602,12 @@ button.note-color-btn {
 .forgot a:hover{
     color: #e94e02;
 }
-.login-page input[type="submit"] {
+.reg{
+    text-align: center;
+    display: inline-block;
+    background: #337ab7 !important;
+}
+.login-page input[type="submit"],.reg {
     border: none;
     outline: none;
     cursor: pointer;
@@ -1679,7 +1684,7 @@ p.creating {
 }
 .sign-up-row {
     padding: 2em;
-    width: 70%;
+    width: 40%;
     margin: 2em auto;
 }
 .sign-up1{
