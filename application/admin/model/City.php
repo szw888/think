@@ -3,7 +3,7 @@
 namespace app\admin\model;
 use think\Model;
 
-class Cate extends Base
+class City extends Base
 {
 
 

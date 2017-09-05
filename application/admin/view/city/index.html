@@ -31,23 +31,23 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>分类名称</th>
+                        <th>城市名称</th>
                         <th>排序</th>
                         <th>状态</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                {foreach name="cateData" item="vo"}
+                {foreach name="cityData" item="vo"}
                 <tr>
                     <th scope="row">{$vo.id}</th>
-                    <td>{if condition = "$vo['parent_id'] neq 0"}|{/if}{:str_repeat('____',$vo['level'])}{$vo.cate_name}</td>
+                    <td>{if condition = "$vo['parent_id'] neq 0"}|{/if}{:str_repeat('____',$vo['level'])}{$vo.city_name}</td>
                     <td>
                         <input type="text" name = "sort" onchange = "updateSort({$vo.id},this.value);" class="form-control" value="{$vo['list_order']}"  style = "width:auto !important;">
                     </td>
                     <td><a href="javascript:void(0);" onclick = "status({$vo['id']},{$vo['status']} ? 0 : 1);" >{if condition = "$vo['status'] eq 1"}<span class="label label-primary">正常</span>{else/}<span class="label label-danger">待审</span>{/if}</a></td>
                     <td>
-                        <a href = "{:url('Cate/edit',['cid'=>$vo.id])}">
+                        <a href = "{:url('City/edit',['cid'=>$vo.id])}">
                             <span class="label label-primary"><i class = "glyphicon glyphicon-edit"></i>&nbsp;修改</span>
                         </a>
                         <a href = "javascript:void(0);" onclick="status({$vo.id},-1)";>
@@ -75,7 +75,7 @@
     function updateSort(cid,val){
 
         $.ajax({
-            url:"{:url('Cate/sort')}",
+            url:"{:url('City/sort')}",
             dataType:'json',
             type:'post',
             data:{'cid':cid,'val':val},
@@ -94,7 +94,7 @@
         function status($cid, $status) {
             if(confim()) {
                 $.ajax({
-                    url: "{:url('Cate/status')}",
+                    url: "{:url('City/status')}",
                     dataType: 'json',
                     type: 'post',
                     data: {'cid': $cid, 'status': $status},
