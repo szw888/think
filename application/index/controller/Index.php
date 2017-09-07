@@ -6,6 +6,6 @@ class Index
 {
     public function index()
     {
-       return 'index模块';
+       return 'index模块！！！';
    }
 }
