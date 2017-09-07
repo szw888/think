@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="__STATIC__/admin/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/admin/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/admin/css/font-awesome.css" rel="stylesheet">
+    <script src="__STATIC__/admin/js/jquery-1.11.1.min.js"></script>
+    <script src="__STATIC__/admin/js/metisMenu.min.js"></script>
+    <script src="__STATIC__/admin/js/custom.js"></script>
+    <link href="__STATIC__/admin/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <link href="__STATIC__/admin/css/custom.css" rel="stylesheet">
+</head>
+<body class="cbp-spmenu-push">
+<div class="main-content">
+    <!--left-fixed -navigation-->
+    {include file="public/menu" /}
+    <!--left-fixed -navigation-->
+    <!-- header-starts -->
+    {include file="public/head" /}
+    <!-- //header-ends -->
+    <!-- main content start-->
+    <div id="page-wrapper">
+        <div class="table-responsive bs-example widget-shadow">
+            <h4 class = "tit">分类列表</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>分类名称</th>
+                        <th>排序</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {foreach name="cateData" item="vo"}
+                <tr>
+                    <th scope="row">{$vo.id}</th>
+                    <td>{if condition = "$vo['parent_id'] neq 0"}|{/if}{:str_repeat('____',$vo['level'])}{$vo.cate_name}</td>
+                    <td>
+                        <input type="text" name = "sort" onchange = "updateSort({$vo.id},this.value);" class="form-control" value="{$vo['list_order']}"  style = "width:auto !important;">
+                    </td>
+                    <td><a href="javascript:void(0);" onclick = "status({$vo['id']},{$vo['status']} ? 0 : 1);" >{if condition = "$vo['status'] eq 1"}<span class="label label-primary">正常</span>{else/}<span class="label label-danger">待审</span>{/if}</a></td>
+                    <td>
+                        <a href = "{:url('Cate/edit',['cid'=>$vo.id])}">
+                            <span class="label label-primary"><i class = "glyphicon glyphicon-edit"></i>&nbsp;修改</span>
+                        </a>
+                        <a href = "javascript:void(0);" onclick="status({$vo.id},-1)";>
+                            <span class="label label-danger"><i class = "glyphicon glyphicon-remove"></i>&nbsp;删除</span>
+                        </a>
+                    </td>
+
+                </tr>
+
+                {/foreach}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script src="__STATIC__/admin/js/bootstrap.js"> </script>
+<script src="__STATIC__/admin/js/common.js"> </script>
+<script>
+
+
+    /***********排序************/
+    function updateSort(cid,val){
+
+        $.ajax({
+            url:"{:url('Cate/sort')}",
+            dataType:'json',
+            type:'post',
+            data:{'cid':cid,'val':val},
+            success:function(res){
+                if(res.code==1){
+                    alert(res.msg);
+                    location.reload();
+                }else{
+                    alert(res.msg);
+                }
+            }
+        });
+    }
+    /***********修改状态*************/
+
+        function status($cid, $status) {
+            if(confim()) {
+                $.ajax({
+                    url: "{:url('Cate/status')}",
+                    dataType: 'json',
+                    type: 'post',
+                    data: {'cid': $cid, 'status': $status},
+                    success: function (res) {
+                        if (res.code == 1) {
+                            alert(res.msg);
+                            location.reload();
+                        } else {
+                            alert(res.msg);
+                        }
+                    }
+                });
+            }
+        }
+
+</script>
+</body>
+</html>

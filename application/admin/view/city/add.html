@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Bootstrap Core CSS -->
+    <link href="__STATIC__/admin/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- Custom CSS -->
+    <link href="__STATIC__/admin/css/style.css" rel='stylesheet' type='text/css' />
+    <!-- font CSS -->
+    <!-- font-awesome icons -->
+    <link href="__STATIC__/admin/css/font-awesome.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!-- js-->
+    <script src="__STATIC__/admin/js/jquery-1.11.1.min.js"></script>
+    <script src="__STATIC__/admin/js/metisMenu.min.js"></script>
+    <script src="__STATIC__/admin/js/custom.js"></script>
+    <!--animate-->
+    <link href="__STATIC__/admin/css/animate.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="__STATIC__/admin/css/custom.css" rel="stylesheet">
+    <!--//Metis Menu -->
+</head>
+<body class="cbp-spmenu-push">
+<div class="main-content">
+    <!--left-fixed -navigation-->
+    {include file="public/menu" /}
+    <!--left-fixed -navigation-->
+    <!-- header-starts -->
+    {include file="public/head" /}
+    <!-- //header-ends -->
+    <!-- main content start-->
+    <div id="page-wrapper">
+        <div class="widget-shadow " data-example-id="basic-forms">
+            <div class="form-title">
+                <h4>添加城市 :</h4>
+            </div>
+            <div class="form-body">
+                <form class="form-horizontal" method="post" action="{:url('city/add')}">
+
+                    <div class="form-group">
+                        <label for="selector1" class="col-sm-2 control-label">上级城市：</label>
+                        <div class="col-sm-9"><select name="parent_id" id="selector1" class="form-control1">
+                            <option value = '0'>----请选择----</option>
+                           {foreach name = 'cityData' item = 'vo'}
+                                <option value = "{$vo['id']}">{:str_repeat('|____',$vo['level'])}{$vo['city_name']}</option>
+                           {/foreach}
+                        </select></div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label">城市名称：</label>
+                        <div class="col-sm-9"> <input type="text" class="form-control" name = "city_name"  placeholder="请输入城市名称"> </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label">城市英文名称：</label>
+                        <div class="col-sm-9"> <input type="text" class="form-control" name = "city_uname"  placeholder="请输入英文名称"> </div>
+                    </div>
+
+                    <div class="col-sm-offset-2"> <button type="submit" class="btn btn-default">添加</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="__STATIC__/admin/js/bootstrap.js"> </script>
+</body>
+</html>
