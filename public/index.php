@@ -11,7 +11,7 @@
 
 // [ 应用入口文件 ]
 
-// 定义应用目录
+// 定义应用目录3333
 define('APP_PATH', __DIR__ . '/../application/');
 //define('BIND_MODULE','bis');
 // 加载框架引导文件
