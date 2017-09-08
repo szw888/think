@@ -15,20 +15,5 @@ class Register extends Controller
         );
         return $this->fetch();
     }
-    /********获取二级数据*********/
-    public function getSecond(){
-        $firstId = input('post.firstId');
 
-        if(input('post.type')==1){
-            $secondData = model('admin/City')->getSecondByfirst($firstId);
-        }else{
-            $secondData = model('admin/Cate')->getSecondByfirst($firstId);
-        }
-
-        if($secondData){
-            $this->result(['code'=>1,'data'=>$secondData]);
-        }else{
-            $this->result(['code'=>0]);
-        }
-    }
 }
