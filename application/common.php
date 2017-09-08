@@ -31,3 +31,17 @@ function doCurl($url,$type=0,$data=[]){
     curl_close($ch);
     return $output;
 }
+/*
+ * 数据返回
+ * param $code  状态
+ * param $msg   返回信息
+ * param $data  返回数据
+ * */
+function dataBack($code,$msg,$data=''){
+    return [
+        'code'=>$code,
+        'msg' =>$msg,
+        'data'=>$data,
+    ];
+}
+

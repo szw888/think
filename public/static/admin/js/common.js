@@ -53,13 +53,14 @@ function getSecondCate(firstId){
             $data = res.data;
             if($data.code==1){
                 $cateData = $data.data;
-                $option = '';
+                $checkout = '';
                 $.each($cateData, function(index,val) {
-                    $option += "<option value = "+val['id']+">"+val['cate_name']+"</option>";
+                    $checkout += " <input id = 'checkcate' name = 'cateid[]' type = 'checkbox' /> ";
+                    $checkout += " <label for = 'checkcate'>"+ val.cate_name +"</label>"
                 });
-                $('#secondCate').html($option);
+                $('#secondCate').html($checkout);
             }else{
-                $('#secondCate').html('<option value = "">----请选择----</option>');
+                $('#secondCate').html('');
             }
 
         }
