@@ -13,42 +13,54 @@ function confim(){
     }
 }
 /*
- * 通过id 获取子类的数据
+ * 通过id 获取子类的数据   城市
  * @param  firstId  父类id
- * @param  type     类型  1=城市  2=生活分类
  * */
-function getSecond(firstId,type){
+function getSecondCity(firstId){
     $.ajax({
-        url:$url,
+        url:$cityurl,
         type:'post',
         dataType:'json',
-        data:{'firstId':firstId,'type':type},
+        data:{'firstId':firstId},
         success:function(res){
             $data = res.data;
-            if(type==1){
-                if($data.code==1){
-                    $cityData = $data.data;
-                    $option = '';
-                    $.each($cityData, function(index,val) {
-                        $option += "<option value = "+val['id']+">"+val['city_name']+"</option>";
-                    });
-                    $('#secondCity').html($option);
-                }else{
-                    $('#secondCity').html('<option value = "">----请选择----</option>');
-                }
+            if($data.code==1){
+                $cityData = $data.data;
+                $option = '';
+                $.each($cityData, function(index,val) {
+                    $option += "<option value = "+val['id']+">"+val['city_name']+"</option>";
+                });
+                $('#secondCity').html($option);
             }else{
-                if($data.code==1){
-                    $cityData = $data.data;
-                    $option = '';
-                    $.each($cityData, function(index,val) {
-                        $option += "<option value = "+val['id']+">"+val['cate_name']+"</option>";
-                    });
-                    $('#secondCate').html($option);
-                }else{
-                    $('#secondCate').html('<option value = "">----请选择----</option>');
-                }
+                $('#secondCity').html('<option value = "">----请选择----</option>');
             }
 
+        }
+    })
+}
+
+/*
+ * 通过id 获取子类的数据   分类
+ * @param  firstId  父类id
+ * */
+function getSecondCate(firstId){
+    $.ajax({
+        url:$cateurl,
+        type:'post',
+        dataType:'json',
+        data:{'firstId':firstId},
+        success:function(res){
+            $data = res.data;
+            if($data.code==1){
+                $cateData = $data.data;
+                $option = '';
+                $.each($cateData, function(index,val) {
+                    $option += "<option value = "+val['id']+">"+val['cate_name']+"</option>";
+                });
+                $('#secondCate').html($option);
+            }else{
+                $('#secondCate').html('<option value = "">----请选择----</option>');
+            }
 
         }
     })
