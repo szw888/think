@@ -8,7 +8,14 @@ use think\Request;
 
 class Image extends Controller{
     public function uploader(){
-        console.log('33333333333333');
+       $file = Request::instance()->file('file');
+       $info = $file->move('upload');
+
+       if($info && $info->getFilename()){
+           return dataBack('1','success','/'.$info->getPathname());
+       }else{
+           return dataBack('-1','error');
+       }
     }
 }
 ?>

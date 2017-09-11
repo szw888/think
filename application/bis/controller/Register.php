@@ -1,6 +1,6 @@
 <?php
 namespace app\bis\controller;
-
+use think\Loader;
 use think\Controller;
 
 class Register extends Controller
@@ -15,5 +15,33 @@ class Register extends Controller
         );
         return $this->fetch();
     }
+    /*处理商户填写的数据*/
+    public function add(){
+        if(request()->isPost()){
+            $data = input('post.');
+
+            //数据校验
+            $validate_bis = Loader::validate('bis');
+            $validate_location = Loader::validate('location');
+            $validate_account = Loader::validate('account');
+            if(!$validate_bis->check($data)) {
+                $this->error($validate_bis->getError());
+            }elseif (!$validate_location->check($data)){
+                $this->error($validate_location->getError());
+            }elseif (!$validate_account->check($data)){
+                $this->error($validate_account->getError());
+            }else{
+                $res = \Map::getLLByAddress($data['address']);
+                if($res['status']!=0 || $res['result']['precise']!=1){
+                    $this->error('请填写详细的门店地址');
+                }else{
+                    //商户入驻数据的添加
+                }
+
+
+            }
+        }
+    }
+
 
 }
