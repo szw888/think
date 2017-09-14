@@ -52,13 +52,13 @@ function dataBack($code,$msg,$data=''){
 function stringBack($status){
 
     if($status== 1){
-        $str = '审核已通过';
+        $str = '审核已通过';  //status = 1
     }elseif($status == 0){
-        $str = '正在审核中,审核后平台方会发送邮件通知，请您耐心等待……';
+        $str = '正在审核中,审核后平台方会发送邮件通知，请您耐心等待……';   //status = 0
     }elseif($status == 2){
-        $str = '非常抱歉，您提交的申请不符合条件，请重新提交';
+        $str = '非常抱歉，您提交的申请不符合条件，请重新提交';   //status = 2
     }else{
-        $str = '该申请已被删除';
+        $str = '该申请已被删除'; //status = -1
     }
     return $str;
 }

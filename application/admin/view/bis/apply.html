@@ -47,23 +47,21 @@
                     <td scope="row">{$vo['faren']}</td>
                     <td scope="row">{$vo['faren_contacts']}</td>
                     <td>{$vo['create_time']}</td>
-                    <td><a href="javascript:void(0);"><span class="label label-danger">待审</span></a></td>
+                    <td><a href="javascript:void(0);" onclick = "status({$vo['id']},{$vo['status']}==1 ? 0 : 1 )"><span class="label label-danger">待审</span></a></td>
                     <td>
                         <a href = "javascript:void(0);" >
-                        <span class="label label-danger"><i class = "glyphicon glyphicon-remove"></i>&nbsp;删除</span>
+                        <span class="label label-danger" onclick = "status({$vo['id']},-1)"><i class = "glyphicon glyphicon-remove"></i>&nbsp;删除</span>
                         </a>
                     </td>
                 </tr>
                 {/foreach}
-
-
                 </tbody>
             </table>
         </div>
     </div>
 
 </div>
-
+<script>$changeStatusUrl = "{:url('admin/Bis/status')}";</script>
 <script src="__STATIC__/admin/js/bootstrap.js"> </script>
 <script src="__STATIC__/admin/js/common.js"> </script>
 

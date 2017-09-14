@@ -113,6 +113,7 @@ class Register extends Controller
            $this->error('参数错误');
         }
         $status = db('Bis')->field('status')->where('id',$bisId)->find();
+        
         $this->assign('status',$status);
         return $this->fetch();
 
