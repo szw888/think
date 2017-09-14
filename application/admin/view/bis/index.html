@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="__STATIC__/admin/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/admin/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/admin/css/font-awesome.css" rel="stylesheet">
+    <script src="__STATIC__/admin/js/jquery-1.11.1.min.js"></script>
+    <script src="__STATIC__/admin/js/metisMenu.min.js"></script>
+    <script src="__STATIC__/admin/js/custom.js"></script>
+    <link href="__STATIC__/admin/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <link href="__STATIC__/admin/css/custom.css" rel="stylesheet">
+</head>
+<body class="cbp-spmenu-push">
+<div class="main-content">
+    <!--left-fixed -navigation-->
+    {include file="public/menu" /}
+    <!--left-fixed -navigation-->
+    <!-- header-starts -->
+    {include file="public/head" /}
+    <!-- //header-ends -->
+    <!-- main content start-->
+    <div id="page-wrapper">
+        <div class="table-responsive bs-example widget-shadow">
+            <h4 class = "tit">商户入驻申请</h4>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>商户名称</th>
+                    <th>法人</th>
+                    <th>法人联系方式</th>
+                    <th>申请时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach name = "applyData" item = "vo"}
+                <tr>
+                    <td scope="row">{$vo['id']}</td>
+                    <td scope="row">{$vo['bis_name']}</td>
+                    <td scope="row">{$vo['faren']}</td>
+                    <td scope="row">{$vo['faren_contacts']}</td>
+                    <td>{$vo['create_time']}</td>
+                    <td><a href="javascript:void(0);" onclick = "status({$vo['id']},{$vo['status']}==1 ? 0 : 1 )"><span class="label label-danger">待审</span></a></td>
+                    <td>
+                        <a href = "javascript:void(0);" >
+                        <span class="label label-danger" onclick = "status({$vo['id']},-1)"><i class = "glyphicon glyphicon-remove"></i>&nbsp;删除</span>
+                        </a>
+                    </td>
+                </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<script>$changeStatusUrl = "{:url('admin/Bis/status')}";</script>
+<script src="__STATIC__/admin/js/bootstrap.js"> </script>
+<script src="__STATIC__/admin/js/common.js"> </script>
+
+</body>
+</html>
