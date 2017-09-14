@@ -55,7 +55,7 @@ function getSecondCate(firstId){
                 $cateData = $data.data;
                 $checkout = '';
                 $.each($cateData, function(index,val) {
-                    $checkout += " <input id = 'checkcate' name = 'cateid[]' type = 'checkbox' /> ";
+                    $checkout += " <input id = 'checkcate' name = 'category_se_id[]' value = '"+val.id+"' type = 'checkbox' /> ";
                     $checkout += " <label for = 'checkcate'>"+ val.cate_name +"</label>"
                 });
                 $('#secondCate').html($checkout);
@@ -65,4 +65,44 @@ function getSecondCate(firstId){
 
         }
     })
+}
+
+/***********排序************/
+function updateSort(cid,val){
+
+    $.ajax({
+        url:$changeSortUrl,
+        dataType:'json',
+        type:'post',
+        data:{'cid':cid,'val':val},
+        success:function(res){
+            if(res.code==1){
+                alert(res.msg);
+                location.reload();
+            }else{
+                alert(res.msg);
+            }
+        }
+    });
+}
+/***********修改状态*************/
+
+function status($cid, $status) {
+
+    if(confim()) {
+        $.ajax({
+            url: $changeStatusUrl,
+            dataType: 'json',
+            type: 'post',
+            data: {'cid': $cid, 'status': $status},
+            success: function (res) {
+                if (res.code == 1) {
+                    alert(res.msg);
+                    location.reload();
+                } else {
+                    alert(res.msg);
+                }
+            }
+        });
+    }
 }

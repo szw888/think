@@ -5,6 +5,7 @@ use think\Validate;
 class Bis extends Validate
 {
     protected $rule = [
+
         'bis_name'  =>  'require|max:20',
         'city_id'  =>  'require',
         'bis_logo'  =>  'require',
@@ -13,7 +14,7 @@ class Bis extends Validate
         'bank_name'  =>  'require',
         'bank_user'  =>  'require',
         'faren'  =>  'require',
-        'faren_contacts'  =>  'require',
+        ['faren_contacts', 'require|checkMobile', '请输入法人手机号码|法人手机号码格式错误'],
         'bis_email'  =>  'require|email',
     ];
     protected $message  =   [
@@ -26,10 +27,16 @@ class Bis extends Validate
         'bank_name.require' => '请填写开户行名称',
         'bank_user.require' => '请填写开户人姓名',
         'faren.require' => '请填写法人',
-        'faren_contacts.require' => '请填写法人联系方式',
         'bis_email.require' => '请填写商户邮箱',
         'bis_email.email' => '请填写正确的邮箱格式',
     ];
+    function checkMobile($value){
+        if(preg_match("/^1[34578]\d{9}$/",$value)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 }
 ?>

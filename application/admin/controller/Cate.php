@@ -16,12 +16,7 @@ class Cate extends Controller
 
         return $this->fetch();
     }
-    public function map(){
-        $mp = new \Map();
-        $res = $mp->getimg();
-        return $res;
 
-    }
 
     //分类----添加
     public function add()

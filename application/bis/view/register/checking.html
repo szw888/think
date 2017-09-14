@@ -1,0 +1,23 @@
+<html>
+<head>
+    <link href="__STATIC__/admin/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/admin/css/style.css" rel='stylesheet' type='text/css' />
+    <title>审核提示页</title>
+</head>
+<body>
+<div>
+    <div class="main-page" style = "margin-top:100px;">
+        <h3 class="title1" style = "text-align: center;">Blank Page</h3>
+        <div class="blank-page widget-shadow scroll" id="style-2 div1">
+            <p>
+                {if $status}
+                    {$status['status']|stringBack}
+                {else/}
+                    参数错误，并不存在该入驻申请！
+                {/if}
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

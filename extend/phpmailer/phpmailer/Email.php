@@ -30,7 +30,7 @@ class Email
         // 0 = off (for production use)
         // 1 = client messages
         // 2 = client and server messages
-        $mail->SMTPDebug = true;
+        $mail->SMTPDebug = false;
         $mail->CharSet = "utf-8";
         //Set the hostname of the mail server
         $mail->Host = 'smtp.163.com';
@@ -60,9 +60,6 @@ class Email
         //send the message, check for errors
         if (!$mail->send()) {
             echo 'Mailer Error: ' . $mail->ErrorInfo;
-
-        } else {
-            echo 'Message sent!';
         }
     }
 }

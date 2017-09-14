@@ -26,37 +26,36 @@
     <!-- main content start-->
     <div id="page-wrapper">
         <div class="table-responsive bs-example widget-shadow">
-            <h4 class = "tit">分类列表</h4>
+            <h4 class = "tit">商户入驻申请</h4>
             <table class="table table-bordered">
                 <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>城市名称</th>
-                        <th>排序</th>
-                        <th>状态</th>
-                        <th>操作</th>
-                    </tr>
+                <tr>
+                    <th>#</th>
+                    <th>商户名称</th>
+                    <th>法人</th>
+                    <th>法人联系方式</th>
+                    <th>申请时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
                 </thead>
                 <tbody>
-                {foreach name="cityData" item="vo"}
+                {foreach name = "applyData" item = "vo"}
                 <tr>
-                    <th scope="row">{$vo.id}</th>
-                    <td>{if condition = "$vo['parent_id'] neq 0"}|{/if}{:str_repeat('____',$vo['level'])}{$vo.city_name}</td>
+                    <td scope="row">{$vo['id']}</td>
+                    <td scope="row">{$vo['bis_name']}</td>
+                    <td scope="row">{$vo['faren']}</td>
+                    <td scope="row">{$vo['faren_contacts']}</td>
+                    <td>{$vo['create_time']}</td>
+                    <td><a href="javascript:void(0);"><span class="label label-danger">待审</span></a></td>
                     <td>
-                        <input type="text" name = "sort" onchange = "updateSort({$vo.id},this.value);" class="form-control" value="{$vo['list_order']}"  style = "width:auto !important;">
-                    </td>
-                    <td><a href="javascript:void(0);" onclick = "status({$vo['id']},{$vo['status']} ? 0 : 1);" >{if condition = "$vo['status'] eq 1"}<span class="label label-primary">正常</span>{else/}<span class="label label-danger">待审</span>{/if}</a></td>
-                    <td>
-                        <a href = "{:url('City/edit',['cid'=>$vo.id])}">
-                            <span class="label label-primary"><i class = "glyphicon glyphicon-edit"></i>&nbsp;修改</span>
-                        </a>
-                        <a href = "javascript:void(0);" onclick="status({$vo.id},-1)";>
-                            <span class="label label-danger"><i class = "glyphicon glyphicon-remove"></i>&nbsp;删除</span>
+                        <a href = "javascript:void(0);" >
+                        <span class="label label-danger"><i class = "glyphicon glyphicon-remove"></i>&nbsp;删除</span>
                         </a>
                     </td>
                 </tr>
-
                 {/foreach}
+
 
                 </tbody>
             </table>
@@ -64,9 +63,9 @@
     </div>
 
 </div>
-<script>$changeStatusUrl = "{:url('City/status')}";</script>
-<script>$changeSortUrl = "{:url('City/sort')}";</script>
+
 <script src="__STATIC__/admin/js/bootstrap.js"> </script>
 <script src="__STATIC__/admin/js/common.js"> </script>
+
 </body>
 </html>

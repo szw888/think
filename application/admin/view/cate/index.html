@@ -65,51 +65,10 @@
     </div>
 
 </div>
-
+<script>$changeStatusUrl = "{:url('Cate/status')}";</script>
+<script>$changeSortUrl = "{:url('Cate/sort')}";</script>
 <script src="__STATIC__/admin/js/bootstrap.js"> </script>
 <script src="__STATIC__/admin/js/common.js"> </script>
-<script>
 
-
-    /***********排序************/
-    function updateSort(cid,val){
-
-        $.ajax({
-            url:"{:url('Cate/sort')}",
-            dataType:'json',
-            type:'post',
-            data:{'cid':cid,'val':val},
-            success:function(res){
-                if(res.code==1){
-                    alert(res.msg);
-                    location.reload();
-                }else{
-                    alert(res.msg);
-                }
-            }
-        });
-    }
-    /***********修改状态*************/
-
-        function status($cid, $status) {
-            if(confim()) {
-                $.ajax({
-                    url: "{:url('Cate/status')}",
-                    dataType: 'json',
-                    type: 'post',
-                    data: {'cid': $cid, 'status': $status},
-                    success: function (res) {
-                        if (res.code == 1) {
-                            alert(res.msg);
-                            location.reload();
-                        } else {
-                            alert(res.msg);
-                        }
-                    }
-                });
-            }
-        }
-
-</script>
 </body>
 </html>
