@@ -33,6 +33,7 @@ class Register extends Controller
                 $this->error($validate_account->getError());
             }else{
                 $res = \Map::getLLByAddress($data['address']);
+				
                 if($res['status']!=0 || $res['result']['precise']!=1){
                     $this->error('请填写详细的门店地址');
                 }
