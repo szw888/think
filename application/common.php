@@ -52,7 +52,7 @@ function dataBack($code,$msg,$data=''){
 function stringBack($status){
 
     if($status== 1){
-        $str = '审核已通过，如需登录商户后台，请点击链接<a href = "'.request()->domain().'/bis/Login/index.html"> http://www.think.com/bis/Login/index.html </a>进入';  //status = 1
+        $str = '审核已通过，如需登录商户后台，请点击链接<a href = "'.request()->domain().'/bis/Login/index.html"> http://www.think.com/bis/Login/index.html </a>'.request()->domain().'进入';  //status = 1
     }elseif($status == 0){
         $str = '正在审核中,审核后平台方会发送邮件通知，请您耐心等待……';   //status = 0
     }elseif($status == 2){
