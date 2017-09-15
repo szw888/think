@@ -49,7 +49,7 @@ class Register extends Controller
             $bisdata = [
                 'bis_name'=>$data['bis_name'],
                 'city_id'=>$data['city_id'],
-                'city_path'=>empty($data['city_id']) ? $data['city_id'] : $data['city_id'].','.$data['city_path'],
+                'city_path'=>empty($data['city_path']) ? $data['city_id'] : $data['city_id'].','.$data['city_path'],
                 'bis_logo'=>$data['bis_logo'],
                 'bis_licence_logo'=>$data['bis_licence_logo'],
                 'bis_desc'=>$data['bis_desc'],
@@ -113,7 +113,7 @@ class Register extends Controller
            $this->error('参数错误');
         }
         $status = db('Bis')->field('status')->where('id',$bisId)->find();
-        
+
         $this->assign('status',$status);
         return $this->fetch();
 

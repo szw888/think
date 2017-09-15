@@ -14,24 +14,29 @@
     <script src="__STATIC__/admin/js/custom.js"></script>
     <link href="__STATIC__/admin/css/animate.css" rel="stylesheet" type="text/css" media="all">
     <link href="__STATIC__/admin/css/custom.css" rel="stylesheet">
-    <!--uploadify-->
-    <link href="__STATIC__/admin/uploadify/uploadify.css" rel="stylesheet">
-    <script src="__STATIC__/admin/uploadify/jquery.uploadify.js"></script>
 
 </head>
-<body style = "padding-top:120px;">
-
-<form action="{:url('register/add')}" enctype="multipart/form-data" method="post">
+<body class="cbp-spmenu-push">
+<div class="main-content">
+<!--left-fixed -navigation-->
+{include file="public/menu" /}
+<!--left-fixed -navigation-->
+<!-- header-starts -->
+    {include file="public/head" /}
+<!-- //header-ends -->
+<!-- main content start-->
+<div id="page-wrapper">
     <div class="main-page signup-page">
-        <h3 class="title1">商户入驻申请</h3>
-        <div class="sign-up-row widget-shadow">
+        <h3 class="title1" style = "text-align: left;">商户入驻申请详情页</h3>
+
+        <div class="sign-up-row widget-shadow" style = "margin:0;">
             <h5>商户基本信息 :</h5>
             <div class="sign-u">
                 <div class="sign-up1">
                     <h4>商户名称* :</h4>
                 </div>
                 <div class="sign-up2">
-                    <input type="text" name = "bis_name">
+                    <input type="text" name = "bis_name" value = "{$bisData['bis_name']}">
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -43,11 +48,11 @@
                     <select name="city_id" id="selector1" style = "width:30%;" class="form-control1" onchange = "getSecondCity(this.value);">
                         <option value="">&nbsp;----请选择----  </option>
                         {foreach name = 'firstCity' item = 'vo'}
-                        <option value = "{$vo['id']}" >{$vo['city_name']}</option>
+                        <option value = "{$vo['id']}" {if condition = "$vo['id'] eq $bisData['city_id']"}selected = "selected"{/if}>{$vo['city_name']}</option>
                         {/foreach}
                     </select>
                     <select name="city_path" id="secondCity" style = "width:30%;"class="form-control1">
-                        <option value="">&nbsp;----请选择----  </option>
+                        <option value="">{:getSecondName($bisData['city_path'])}</option>
                     </select>
                 </div>
                 <div class="clearfix"> </div>
@@ -57,9 +62,7 @@
                     <h4>缩略图* :</h4>
                 </div>
                 <div class="sign-up2" style = "padding:20px 0;">
-                    <input type="file" id="file_upload">
-                    <input type="hidden" id = "pathName_litpic" name = "bis_logo"/>
-                    <img width = 200 src = "" id = "litpic"/>
+                    <img width = 200 src = "{$bisData['bis_logo']}" id = "litpic"/>
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -68,9 +71,7 @@
                     <h4>营业执照* :</h4>
                 </div>
                 <div class="sign-up2" style = "padding:20px 0;">
-                    <input type="file" id = "license">
-                    <input type="hidden" id = "license_path" name = "bis_licence_logo"/>
-                    <img width = 200 src = "" id = "license_img"/>
+                    <img width = 200 src = "{$bisData['bis_licence_logo']}" id = "license_img"/>
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -79,7 +80,7 @@
                     <h4>商户介绍* :</h4>
                 </div>
                 <div class="sign-up2" style = "padding:20px 0;">
-                    <textarea name="bis_desc" id="bis_desc" ></textarea>
+                    <textarea name="bis_desc" id="bis_desc">{$bisData['bis_desc']}</textarea>
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -88,16 +89,16 @@
                     <h4>银行账户* :</h4>
                 </div>
                 <div class="sign-up2" >
-                    <input type="text" name = "bank_info">
+                    <input type="text" name = "bank_info" value = "{$bisData['bank_info']}">
                 </div>
-                <div class="clearfix"> </div>
+                <div class="clearfix"></div>
             </div>
             <div class="sign-u">
                 <div class="sign-up1">
                     <h4>开户行名称* :</h4>
                 </div>
                 <div class="sign-up2" >
-                    <input type="text" name = "bank_name" >
+                    <input type="text" name = "bank_name" value = "{$bisData['bank_name']}">
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -106,7 +107,7 @@
                     <h4>开户行姓名* :</h4>
                 </div>
                 <div class="sign-up2" >
-                    <input type="text"  name = "bank_user">
+                    <input type="text"  name = "bank_user" value = "{$bisData['bank_user']}">
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -115,7 +116,7 @@
                     <h4>法人* :</h4>
                 </div>
                 <div class="sign-up2" >
-                    <input type="text" name = "faren" >
+                    <input type="text" name = "faren" value = "{$bisData['faren']}">
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -124,7 +125,7 @@
                     <h4>法人电话* :</h4>
                 </div>
                 <div class="sign-up2" >
-                    <input type="text" name = "faren_contacts" >
+                    <input type="text" name = "faren_contacts" value = "{$bisData['faren_contacts']}" >
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -133,7 +134,7 @@
                     <h4>邮箱* :</h4>
                 </div>
                 <div class="sign-up2" >
-                    <input type="text" name = "bis_email" >
+                    <input type="text" name = "bis_email" value = "{$bisData['bis_email']}">
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -143,7 +144,7 @@
                     <h4>电话* :</h4>
                 </div>
                 <div class="sign-up2">
-                    <input type="text" name = "telephone">
+                    <input type="text" name = "telephone" value = "{$locationData['telephone']}">
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -152,7 +153,7 @@
                     <h4>联系人* :</h4>
                 </div>
                 <div class="sign-up2">
-                    <input type="text" name = "contacts">
+                    <input type="text" name = "contacts" value = "{$locationData['contacts']}">
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -164,7 +165,7 @@
                     <select name="category_id" id="selector3" class="form-control1"  onchange = "getSecondCate(this.value);">
                         <option value = "">---请选择---</option>
                         {foreach name = 'firstCate' item = 'vo'}
-                        <option value = "{$vo['id']}" >{$vo['cate_name']}</option>
+                        <option value = "{$vo['id']}" {if condition = "$vo['id'] eq $locationData['category_id']"}selected = "selected"{/if}>{$vo['cate_name']}</option>
                         {/foreach}
                     </select>
                 </div>
@@ -175,7 +176,7 @@
                     <h4>所属子类* :</h4>
                 </div>
                 <div class="sign-up2" id = 'secondCate'>
-
+                    {:getSeCate($locationData['category_path'])}
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -184,7 +185,7 @@
                     <h4>门店地址* :</h4>
                 </div>
                 <div class="sign-up2">
-                    <input type="text" name = "address">
+                    <input type="text" name = "address" value = "{$locationData['address']}">
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -193,7 +194,7 @@
                     <h4>营业时间* :</h4>
                 </div>
                 <div class="sign-up2">
-                    <input type="text" name = "open_time">
+                    <input type="text" name = "open_time" value = "{$locationData['open_time']}">
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -202,9 +203,9 @@
                     <h4>门店介绍* :</h4>
                 </div>
                 <div class="sign-up2" style = "padding:20px 0;">
-                    <textarea name="location_desc" id="location_desc"></textarea>
+                    <textarea name="location_desc" id="location_desc">{$locationData['location_desc']}</textarea>
                 </div>
-                <div class="clearfix"> </div>
+                <div class="clearfix"></div>
             </div>
             <h6>账号信息 :</h6>
             <div class="sign-u">
@@ -212,42 +213,26 @@
                     <h4>用户名* :</h4>
                 </div>
                 <div class="sign-up2">
-                    <input type="text" name = "bis_user_name">
+                    <input type="text" name = "bis_user_name" value = "{$accountData['bis_user_name']}">
                 </div>
                 <div class="clearfix"> </div>
             </div>
-            <div class="sign-u">
-                <div class="sign-up1">
-                    <h4>密码* :</h4>
-                </div>
-                <div class="sign-up2">
-                    <input type="password" name = "bis_user_password">
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-            <div class="sub_home">
-                <input type="submit" value="提交审核">
-                <div class="clearfix"> </div>
-            </div>
+           
+
         </div>
     </div>
-</form>
+</div>
 
-
-
-<script src="__STATIC__/admin/js/bootstrap.js"> </script>
+</div>
+<script>$cityurl = "{:url('api/city/getSecond')}";</script>
+<script>$cateurl = "{:url('api/cate/getSecond')}";</script>
 <script type="text/javascript" charset="utf-8" src="__STATIC__/admin/Ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="__STATIC__/admin/Ueditor/ueditor.all.min.js"> </script>
 <script type="text/javascript" charset="utf-8" src="__STATIC__/admin/Ueditor/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript" charset="utf-8" src="__STATIC__/admin/js/common.js"></script>
 <script type="text/javascript" charset="utf-8" src="__STATIC__/admin/js/image.js"></script>
-<script>
-    $cityurl = "{:url('api/city/getSecond')}";
-    $cateurl = "{:url('api/cate/getSecond')}";
-    $uploadify_swf = "__STATIC__/admin/uploadify/uploadify.swf";
-    $uploadify_uploader = "{:url('api/image/uploader')}";
-</script>
-
+<script src="__STATIC__/admin/js/bootstrap.js"> </script>
+<script src="__STATIC__/admin/js/common.js"> </script>
 <script> UE.getEditor('bis_desc');UE.getEditor('location_desc');</script>
 
 </body>

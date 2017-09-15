@@ -9,7 +9,8 @@ class Cate extends Base
     //数据的添加
     public function add($data){
         $data['status'] = 1;
-        return $this->save($data);
+        $this->save($data);
+        return $this->id;
     }
 
 

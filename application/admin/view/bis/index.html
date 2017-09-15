@@ -40,23 +40,27 @@
                 </tr>
                 </thead>
                 <tbody>
-                {foreach name = "succData" item = "vo"}
+                {foreach name = "$succData" item = "vo"}
                 <tr>
                     <td scope="row">{$vo['id']}</td>
                     <td scope="row">{$vo['bis_name']}</td>
                     <td scope="row">{$vo['faren']}</td>
                     <td scope="row">{$vo['faren_contacts']}</td>
                     <td>{$vo['create_time']}</td>
-                    <td><a href="javascript:void(0);">{if condition = "$vo['status'] eq 1"}<span class="label label-success">通过</span>{else/}<span class="label label-danger">待审</span>{/if}</a></td>
+                    <td><a href="javascript:void(0);">{if condition = "$vo['status'] eq 1"}<span  class="label label-success">通过</span>{/if}</a></td>
                     <td>
                         <a href = "javascript:void(0);" >
-                        <span class="label label-danger" onclick = "status({$vo['id']},-1)"><i class = "glyphicon glyphicon-remove"></i>&nbsp;删除</span>
+                            <a class="label label-primary" title = "查看" href = "{:url('admin/bis/detail',['bid'=>$vo.id])}"><i class = "glyphicon glyphicon-zoom-in"></i></a>
+                            <span class="label label-danger"  title = "删除" onclick = "status({$vo['id']},-1)"><i class = "glyphicon glyphicon-remove"></i></span>
+                            <span class="label label-danger"  title = "不通过" onclick = "status({$vo['id']},2)"><i class = "glyphicon glyphicon-ban-circle"></i></span>
                         </a>
                     </td>
                 </tr>
                 {/foreach}
                 </tbody>
             </table>
+
+            {$succData->render()}
         </div>
     </div>
 

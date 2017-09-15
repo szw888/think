@@ -52,7 +52,7 @@ function dataBack($code,$msg,$data=''){
 function stringBack($status){
 
     if($status== 1){
-        $str = '审核已通过';  //status = 1
+        $str = '审核已通过，如需登录商户后台，请点击链接<a href = "http://www.think.com/bis/Login/index.html"> http://www.think.com/bis/Login/index.html </a>进入';  //status = 1
     }elseif($status == 0){
         $str = '正在审核中,审核后平台方会发送邮件通知，请您耐心等待……';   //status = 0
     }elseif($status == 2){
@@ -61,4 +61,42 @@ function stringBack($status){
         $str = '该申请已被删除'; //status = -1
     }
     return $str;
+}
+
+/*
+ * 通过id 获取二级分类名称
+ * param $city_path  分类path
+ * return  string  name
+ * */
+function getSecondName($city_path){
+    if(empty($city_path)){
+        return '';
+    }
+    if(preg_match('/,/',$city_path)){
+        $res = explode(',',$city_path);
+        $sc_id = $res[1];
+        $cityData = model('City')->get(['id'=>$sc_id]);
+        return $cityData['city_name'];
+    }else{
+        return '';
+    }
+
+}
+
+function getSeCate($cate_path){
+    if(empty($cate_path)){
+        return '';
+    }
+    if(preg_match('/,/',$cate_path)){
+        $res = explode(',',$cate_path);
+        $sc_id = $res[1];
+        if(empty($sc_id)){
+            return '';
+        }
+        $cate_id = explode('|',$sc_id);
+        $res = model('Cate')->all($cate_id);
+        foreach($res as $key=>$val){
+            return "<input type = 'checkbox' checked = 'checked' id = 'cat[".$key."]'/><label for = 'cat[".$key."]'>$val->cate_name</label>";
+        }
+    }
 }
