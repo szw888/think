@@ -34,7 +34,7 @@ class User extends Controller
         }
 
         if(session('admin_user_session','','admin') !== null || session('admin_user_session','','admin') !== ''){
-            $this->redirect('admin/index/index');
+            redirect('admin/index/index');
         }
         return $this->fetch();
     }
