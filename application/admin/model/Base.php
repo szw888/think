@@ -5,8 +5,9 @@ use think\Model;
 class Base extends Model{
     //数据的添加
     public function add($data){
-        $data['status'] = 1;
-        return $this->save($data);
+        $data['status'] = 0;
+        $this->save($data);
+        return $this->id;
     }
     //通过一级的 id 获取二级数据
     public function getSecondByfirst($firstId){

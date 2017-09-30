@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Bootstrap Core CSS -->
+    <link href="__STATIC__/admin/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- Custom CSS -->
+    <link href="__STATIC__/admin/css/style.css" rel='stylesheet' type='text/css' />
+    <!-- font CSS -->
+    <!-- font-awesome icons -->
+    <link href="__STATIC__/admin/css/font-awesome.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!-- js-->
+    <script src="__STATIC__/admin/js/jquery-1.11.1.min.js"></script>
+    <script src="__STATIC__/admin/js/metisMenu.min.js"></script>
+    <script src="__STATIC__/admin/js/custom.js"></script>
+    <!--animate-->
+    <link href="__STATIC__/admin/css/animate.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="__STATIC__/admin/css/custom.css" rel="stylesheet">
+    <link href="__STATIC__/admin/uploadify/uploadify.css" rel="stylesheet">
+    <script src="__STATIC__/admin/uploadify/jquery.uploadify.js"></script>
+    <!--//Metis Menu -->
+</head>
+<body class="cbp-spmenu-push">
+<div class="main-content">
+    <!--left-fixed -navigation-->
+    {include file="public/menu" /}
+    <!--left-fixed -navigation-->
+    <!-- header-starts -->
+    {include file="public/head" /}
+    <!-- //header-ends -->
+    <!-- main content start-->
+    <div id="page-wrapper">
+        <div class="widget-shadow " data-example-id="basic-forms">
+            <div class="form-title">
+                <h4>添加推荐位 :</h4>
+            </div>
+            <div class="form-body">
+                <form class="form-horizontal" method="post" action="{:url('recommend/add')}">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">标题：</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name = "title" id="inputPassword3" placeholder="请输入推荐位标题">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">缩略图：</label>
+                        <div class="col-sm-6">
+                            <input type="file" class="form-control" id = "recommend_img"  >
+                            <input type="hidden" name =  "img" id = "url_link" />
+                            <img  id = "url_src"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="selector1" class="col-sm-2 control-label">推荐位类型：</label>
+                        <div class="col-sm-3">
+                            <select name="type" id="selector1" class="form-control1">
+                                {volist name = "recData" id = "vo"}
+                                <option value = '{$key}'>{$vo}</option>
+                                {/volist}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">URL：</label>
+                        <div class="col-sm-3"> <input type="text" class="form-control" name = "url" > </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">描述：</label>
+                        <div class="col-sm-5">
+                            <textarea  class="form-control" style = "height:150px;" name = "description" id="" placeholder="推荐位描述"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-offset-2"> <button type="submit" class="btn btn-default">添加</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    $uploadify_swf = "__STATIC__/admin/uploadify/uploadify.swf";
+    $uploadify_uploader = "{:url('api/image/uploader')}";
+</script>
+<script src="__STATIC__/admin/js/bootstrap.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/admin/js/common.js"></script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/admin/js/image.js"></script>
+
+</body>
+</html>

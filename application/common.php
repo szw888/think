@@ -73,10 +73,11 @@ function getSecondName($city_path){
     if(empty($city_path)){
         return '';
     }
+
     if(preg_match('/,/',$city_path)){
         $res = explode(',',$city_path);
         $sc_id = $res[1];
-        $cityData = model('City')->get(['id'=>$sc_id]);
+        $cityData = model('admin/City')->get(['id'=>$sc_id]);
         return $cityData['city_name'];
     }else{
         return '';
@@ -84,20 +85,85 @@ function getSecondName($city_path){
 
 }
 
-function getSeCate($cate_path){
-    if(empty($cate_path)){
-        return '';
-    }
-    if(preg_match('/,/',$cate_path)){
-        $res = explode(',',$cate_path);
-        $sc_id = $res[1];
-        if(empty($sc_id)){
-            return '';
-        }
-        $cate_id = explode('|',$sc_id);
-        $res = model('Cate')->all($cate_id);
-        foreach($res as $key=>$val){
-            return "<input type = 'checkbox' checked = 'checked' id = 'cat[".$key."]'/><label for = 'cat[".$key."]'>$val->cate_name</label>";
-        }
+
+/* 通过分类id 获取分类信息
+ * @param $cateid   分类id
+ * return string
+ * */
+function getCateInfoById($cateid){
+    if(!empty($cateid) && is_numeric($cateid)){
+        $res = model('admin/Cate')->field('cate_name')->find($cateid);
+        return $res['cate_name'];
     }
 }
+
+/* 通过分类path 获取分类信息
+ * @param $cateid   分类path
+ * return string
+ * */
+function getSeCate($cate_path){
+    $checkbox = '';
+    if($cate_path && preg_match('/,/',$cate_path)){
+        $arr = explode(',',$cate_path);
+
+        foreach($arr as $k=>$v){
+            $res = model('admin/cate')->field('cate_name')->where('id',$v)->find();
+            $checkbox .= "<input type = 'checkbox' checked = 'checked'/> &nbsp; ".$res['cate_name']." &nbsp; ";
+        }
+
+    }else if(!empty($cate_path) && !preg_match('/,/',$cate_path)){
+        $res = model('admin/cate')->field('cate_name')->where('id',$cate_path)->find();
+        $checkbox = "<input type = 'checkbox' checked = 'checked'/> &nbsp; ".$res['cate_name']." &nbsp; ";
+    }
+    return $checkbox;
+}
+
+
+/*
+ * 通过城市路径获取对应的城市名称
+ * @param  $cityPath   string
+ * reutrn string
+ * */
+function getCityPathById($cityPath){
+   if($cityPath && preg_match('/,/',$cityPath)){
+       $arr = explode(',',$cityPath);
+
+       $res = model('admin/City')->field('city_name')->where('id',$arr[0])->find();
+       $select = "<select class = 'form-control1' style= 'width:30%;'>";
+       $select .= "<option>".$res['city_name']."</option>";
+       $select .= "</select>";
+
+       $res2 = model('admin/City')->field('city_name')->where('id',$arr[1])->find();
+       $select2 = "<select class = 'form-control1' style= 'width:30%;'>";
+       $select2 .= "<option>".$res2['city_name']."</option>";
+       $select2 .= "</select>";
+
+
+       return $select.$select2;
+   }
+}
+
+
+/*
+ * 获取团购商品所支持的门店
+ * @param  $location_id   门店id  string
+ * return string
+ * */
+function getStoreByIds($location_id){
+    if($location_id && preg_match('/,/',$location_id)){
+        $arr = explode(',',$location_id);
+        $checkbox = '';
+        foreach($arr as $k=>$v){
+            $res = model('admin/location')->field('location_name')->where('id',$v)->find();
+            $checkbox .= "<input type = 'checkbox' checked = 'checked'/> &nbsp; ".$res['location_name']." &nbsp; ";
+        }
+
+    }else{
+        $res = model('admin/location')->field('location_name')->where('id',$location_id)->find();
+        $checkbox = "<input type = 'checkbox' checked = 'checked'/> &nbsp; ".$res['location_name']." &nbsp; ";
+    }
+    return $checkbox;
+}
+
+
+

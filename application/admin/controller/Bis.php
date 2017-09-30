@@ -2,7 +2,7 @@
 namespace app\admin\controller;
 use think\Controller;
 use think\Loader;
-class Bis extends Controller
+class Bis extends Base
 {
     //商户审核----列表
     public function apply()

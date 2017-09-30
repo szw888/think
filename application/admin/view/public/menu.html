@@ -43,37 +43,41 @@
                     <!-- //nav-second-level -->
                 </li>
                 <li>
-                    <a href="tables.html"><i class="fa fa-table nav_icon"></i>Tables<span class="fa arrow"></span></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-check-square-o nav_icon"></i>Forms<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-check-square-o nav_icon"></i>门店管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="forms.html">Basic Forms </a>
+                            <a href="{:url('admin/store/index')}">门店审核列表</a>
                         </li>
                         <li>
-                            <a href="validation.html">Validation</a>
+                            <a href="{:url('admin/store/lst')}">门店列表</a>
                         </li>
                     </ul>
                     <!-- //nav-second-level -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-file-text-o nav_icon"></i>Pages<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-file-text-o nav_icon"></i>团购管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="login.html">Login</a>
+                            <a href="{:url('admin/goods/search',['status'=>'0'])}">团购审核列表</a>
                         </li>
                         <li>
-                            <a href="signup.html">SignUp</a>
+                            <a href="{:url('admin/goods/search',['status'=>'1'])}">团购列表</a>
                         </li>
-                        <li>
-                            <a href="blank-page.html">Blank Page</a>
-                        </li>
+
                     </ul>
                     <!-- //nav-second-level 是-->
                 </li>
                 <li>
-                    <a href="charts.html" class="chart-nav"><i class="fa fa-bar-chart nav_icon"></i>Charts <span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-envelope nav_icon"></i>推荐位管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="{:url('admin/recommend/add')}">新增推荐位 </a>
+                        </li>
+                        <li>
+                            <a href="{:url('admin/recommend/index')}">推荐位列表</a>
+                        </li>
+                    </ul>
+                    <!-- //nav-second-level -->
                 </li>
             </ul>
             <!-- //sidebar-collapse -->

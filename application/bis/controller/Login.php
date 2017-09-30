@@ -28,9 +28,17 @@ class Login extends Controller
             ],['id' => $bis_account['id']]);
             /*将商户登录数据保存至session*/
             session('bis_user_session',$bis_account,'bis');
-            $this->success('登录成功',url('bis/index/index'));
+            $this->success('登录成功',url('index/index'));
         }
+        if(!session('bis_user_session','','bis')){
+            return $this->fetch();
+        }else{
+            $this->redirect('index/index');
+        }
+    }
 
-        return $this->fetch();
+    public function logout(){
+        session(null,'bis');
+        $this->redirect('login/index');
     }
 }

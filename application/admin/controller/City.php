@@ -1,8 +1,7 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
 use think\Loader;
-class City extends Controller
+class City extends Base
 {
     //城市----列表
     public function index()
@@ -76,27 +75,6 @@ class City extends Controller
 
     }
 
-    //城市排序
-    public function sort(){
-        $data = input('post.');
-        $res = model('City')->update(['id' => $data['cid'], 'list_order' => $data['val']]);
-        if($res){
-            echo json_encode(['code'=>1,'msg'=>'更新成功']);
-        }else{
-            echo json_encode(['code'=>-1,'msg'=>'更新失败']);
-        }
 
-    }
 
-    //修改状态
-    public function status(){
-        $data = input('post.');
-
-       $res = model('City')->update(['id' => $data['cid'], 'status' => $data['status']]);
-       if($res){
-           $this->result(['code'=>1,'msg'=>'操作成功']);
-       }else{
-           $this->result(['code'=>-1,'msg'=>'操作失败']);
-       }
-    }
 }

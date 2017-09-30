@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="__STATIC__/admin/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/admin/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/admin/css/font-awesome.css" rel="stylesheet">
+    <script src="__STATIC__/admin/js/jquery-1.11.1.min.js"></script>
+    <script src="__STATIC__/admin/js/metisMenu.min.js"></script>
+    <script src="__STATIC__/admin/js/custom.js"></script>
+    <link href="__STATIC__/admin/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <link href="__STATIC__/admin/css/custom.css" rel="stylesheet">
+</head>
+<body class="cbp-spmenu-push">
+<div class="main-content">
+    <!--left-fixed -navigation-->
+    {include file="public/menu" /}
+    <!--left-fixed -navigation-->
+    <!-- header-starts -->
+    {include file="public/head" /}
+    <!-- //header-ends -->
+    <!-- main content start-->
+    <div id="page-wrapper">
+        <div class="table-responsive bs-example widget-shadow">
+            <h4 class = "tit">团购列表</h4>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>团购商品名称</th>
+                    <th>logo</th>
+                    <th>原价</th>
+                    <th>团购价</th>
+                    <th>分类</th>
+                    <th>团购开始-结束时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="goods_lst" id="vo"}
+                <tr>
+                    <th scope="row">{$vo['id']}</th>
+                    <th scope="row">{$vo['name']}</th>
+                    <th scope="row"><img width="100" src = "{$vo['image']}" /></th>
+                    <td>{$vo['org_price']}</td>
+                    <td>{$vo['current_price']}</td>
+                    <td>{:getCateInfoById($vo['category_id'])}</td>
+                    <td>{:date("Y-m-d H:i:s",$vo['start_time'])}</br>{:date("Y-m-d H:i:s",$vo['end_time'])}</td>
+                    <td><a href="javascript:void(0);">{if condition = "$vo['status'] eq 1"}<span class="label label-primary">正常</span>{else/}<span class="label label-default">待审</span>{/if}</a></td>
+                    <td>
+                        <a href = "">
+                            <a class="label label-primary" href = "{:url('bis/goods/detail',['goodsId'=>$vo.id])}"><i class = "glyphicon glyphicon-edit"></i>&nbsp;查看</a>
+                        </a>
+                        <a href = "javascript:void(0);" >
+                            <span class="label label-danger" onclick = "status({$vo['id']},'-1')"><i class = "glyphicon glyphicon-remove"></i>&nbsp;删除</span>
+                        </a>
+                    </td>
+
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+            {$goods_lst->render()}
+        </div>
+    </div>
+</div>
+<script>$changeStatusUrl = "{:url('admin/store/status')}";</script>
+<script src="__STATIC__/admin/js/bootstrap.js"> </script>
+<script src="__STATIC__/admin/js/common.js"> </script>
+</body>
+</html>

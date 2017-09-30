@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="__STATIC__/admin/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/admin/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/admin/css/font-awesome.css" rel="stylesheet">
+    <script src="__STATIC__/admin/js/jquery-1.11.1.min.js"></script>
+    <script src="__STATIC__/admin/js/metisMenu.min.js"></script>
+    <script src="__STATIC__/admin/js/custom.js"></script>
+    <link href="__STATIC__/admin/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <link href="__STATIC__/admin/css/custom.css" rel="stylesheet">
+    <!--uploadify-->
+    <link href="__STATIC__/admin/uploadify/uploadify.css" rel="stylesheet">
+    <link href="__STATIC__/admin/datetimepicker/jquery-ui-1.9.2.custom.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" media="all" type="text/css" href="__STATIC__/admin/datetimepicker/time/jquery-ui-timepicker-addon.min.css" />
+    <script src="__STATIC__/admin/uploadify/jquery.uploadify.js"></script>
+    <style>
+        #page-wrapper h5,#page-wrapper h6{
+            margin: 0 0 1em;
+            color: #6164C1;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body class="cbp-spmenu-push">
+<div class="main-content">
+    <!--left-fixed -navigation-->
+    {include file="public/menu" /}
+    <!--left-fixed -navigation-->
+    <!-- header-starts -->
+    {include file="public/head" /}
+    <!-- //header-ends -->
+    <!-- main content start-->
+    <form action="{:url('bis/goods/add')}" method="post">
+        <div id="page-wrapper">
+        <div class="sign-up-row widget-shadow">
+        <h6>新增团购 :</h6>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>团购商品名称* :</h4>
+            </div>
+            <div class="sign-up2">
+                <input type="text" name = "name">
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>所属城市* :</h4>
+            </div>
+            <div class="sign-up2" style = "padding:10px 0;">
+                <select name="city_id" id="selector1" style = "width:30%;" class="form-control1" onchange = "getSecondCity(this.value);">
+                    <option value="">&nbsp;----请选择----  </option>
+                    {foreach name = 'firstCity' item = 'vo'}
+                    <option value = "{$vo['id']}" >{$vo['city_name']}</option>
+                    {/foreach}
+                </select>
+                <select name="city_path" id="secondCity" style = "width:30%;"class="form-control1">
+                    <option value="">&nbsp;----请选择----  </option>
+                </select>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>缩略图* :</h4>
+            </div>
+            <div class="sign-up2" style = "padding:20px 0;">
+                <input type="file" id="shop_logo">
+                <input type="hidden" id = "imgaddress" name = "image"/>
+                <img width = 200 src = "" id = "imgsrc"/>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>支持门店* :</h4>
+            </div>
+            <div class="sign-up2" style = "padding:20px 0;">
+                {volist name = "location_lst" id = "vo"}
+                <input type="checkbox" value = "{$vo['id']}" name = "location_id[]">&nbsp;{$vo['location_name']}
+                {/volist}
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>团购开始时间* :</h4>
+            </div>
+            <div class="sign-up2">
+                <input type="text" name = "start_time" class = "time" readonly >
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>团购结束时间* :</h4>
+            </div>
+            <div class="sign-up2">
+                <input type="text" name = "end_time" class = "time" readonly >
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>库存* :</h4>
+            </div>
+            <div class="sign-up2">
+                <input type="text" name = "total_count">
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>原价* :</h4>
+            </div>
+            <div class="sign-up2">
+                <input type="text" name = "org_price">
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>团购价* :</h4>
+            </div>
+            <div class="sign-up2">
+                <input type="text" name = "current_price">
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>消费券生效时间* :</h4>
+            </div>
+            <div class="sign-up2">
+                <input type="text" name = "quan_start_time" class = "time" readonly>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>消费券失效时间* :</h4>
+            </div>
+            <div class="sign-up2">
+                <input type="text" name = "quan_end_time" class = "time" readonly>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>所属分类* :</h4>
+            </div>
+            <div class="sign-up2" style = "padding:20px 0;">
+                <select name="category_id" id="selector3" class="form-control1"  onchange = "getSecondCate(this.value);">
+                    <option value = "">---请选择---</option>
+                    {foreach name = 'firstCate' item = 'vo'}
+                    <option value = "{$vo['id']}" >{$vo['cate_name']}</option>
+                    {/foreach}
+                </select>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="sign-u">
+            <div class="se_category_id">
+                <h4>所属子类* :</h4>
+            </div>
+            <div class="sign-up2" id = 'secondCate'>
+
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>团购介绍* :</h4>
+            </div>
+            <div class="sign-up2" style = "padding:20px 0;">
+                <textarea name="description" id="description"></textarea>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+
+        <div class="sub_home">
+            <input type="submit" value="提交审核">
+            <div class="clearfix"> </div>
+        </div>
+        </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $cityurl = "{:url('api/city/getSecond')}";
+    $cateurl = "{:url('api/cate/getSecond')}";
+    $uploadify_swf = "__STATIC__/admin/uploadify/uploadify.swf";
+    $uploadify_uploader = "{:url('api/image/uploader')}";
+</script>
+<script src="__STATIC__/admin/js/bootstrap.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/admin/Ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/admin/Ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/admin/Ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<script type="text/javascript" charset="utf-8" src="__STATIC__/admin/datetimepicker/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/admin/datetimepicker/datepicker-zh_cn.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/datetimepicker/time/jquery-ui-timepicker-addon.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/datetimepicker/time/i18n/jquery-ui-timepicker-addon-i18n.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/admin/js/common.js"></script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/admin/js/image.js"></script>
+<script>
+    /*百度编辑器配置*/
+    UE.getEditor('description');
+    /*时间插件配置*/
+    $.timepicker.setDefaults($.timepicker.regional['zh-CN']);
+    $(".time").datetimepicker({ dateFormat: "yy-mm-dd" });
+</script>
+
+</body>
+</html>

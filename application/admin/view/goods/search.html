@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="__STATIC__/admin/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/admin/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="__STATIC__/admin/css/font-awesome.css" rel="stylesheet">
+    <script src="__STATIC__/admin/js/jquery-1.11.1.min.js"></script>
+    <script src="__STATIC__/admin/js/metisMenu.min.js"></script>
+    <script src="__STATIC__/admin/js/custom.js"></script>
+    <link href="__STATIC__/admin/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <link href="__STATIC__/admin/css/custom.css" rel="stylesheet">
+
+    <link href="__STATIC__/admin/datetimepicker/jquery-ui-1.9.2.custom.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" media="all" type="text/css" href="__STATIC__/admin/datetimepicker/time/jquery-ui-timepicker-addon.min.css" />
+</head>
+<body class="cbp-spmenu-push">
+<div class="main-content">
+    <!--left-fixed -navigation-->
+    {include file="public/menu" /}
+    <!--left-fixed -navigation-->
+    <!-- header-starts -->
+    {include file="public/head" /}
+    <!-- //header-ends -->
+    <!-- main content start-->
+    <div id="page-wrapper">
+        <div class="table-responsive bs-example widget-shadow">
+            <h4 class = "tit">团购审核列表</h4>
+            <form class="form-inline" style = "margin-bottom: 2em;" method="get" action="{:url('admin/goods/search')}">
+                <input type = "hidden" name = 'status' value = "{$Request.param.status}"/>
+                <div class="form-group">
+                    <label for="exampleInputName2">商品名称 ：</label>
+                    <input type="text" class="form-control" name = "shop_name" value = "{$Think.get.shop_name}" id="exampleInputName2" placeholder="请输入商品名称">
+                </div>&nbsp;&nbsp;&nbsp;
+
+                <div class="form-group">
+                    <label for="exampleInputName2">商品分类 ：</label>
+                    <select name = "category_id" class="form-control">
+                    {volist name = "cateData" id = "vo"}
+                        <option value = "{$vo['id']}" {if condition = "$Think.get.category_id eq $vo['id']"}selected = "selected"{/if}>{$vo['cate_name']}</option>
+                    {/volist}
+                    </select>
+
+                </div>&nbsp;&nbsp;&nbsp;
+
+                <div class="form-group">
+                    <label for="price">团购价 ：</label>
+                    <input type="text" class="form-control" name = "sm_price" id="price" placeholder="最低价" value = "{$Think.get.sm_price}" >
+                    <input type="text" class="form-control" name = "big_price" placeholder="最高价" value = "{$Think.get.big_price}" >
+                </div>&nbsp;&nbsp;&nbsp;
+                <div class="form-group">
+                    <label for="time">团购开始时间 ：</label>
+                    <input type="text" class="form-control time" name = "start_time" id="time" placeholder="最小时间" value = "{$Think.get.start_time}">
+                    <input type="text" class="form-control time" name = "end_time"  placeholder="最大时间" value = "{$Think.get.end_time}">
+                </div>
+                <button type="submit"  class="btn btn-primary" style = "border-radius: 0;">搜 索</button>
+            </form>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>团购商品名称</th>
+                    <th>logo</th>
+                    <th>原价</th>
+                    <th>团购价</th>
+                    <th>分类</th>
+                    <th>团购开始-结束时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="goodCheckData" id="vo"}
+                <tr>
+                    <th scope="row">{$vo['id']}</th>
+                    <th scope="row">{$vo['name']}</th>
+                    <th scope="row"><image width = 100 src = "{$vo['image']}"/></th>
+                    <td>{$vo['org_price']}</td>
+                    <td>{$vo['current_price']}</td>
+                    <td>{:getCateInfoById($vo['category_id'])}</td>
+                    <td>{:date('Y-m-d H:i:s',$vo['start_time'])}<br/>{:date('Y-m-d H:i:s',$vo['end_time'])}</td>
+                    <td><a href="javascript:void(0);" onclick = "status({$vo['id']},{$vo['status']} ? 0 : 1)">{if condition = "$vo['status'] eq 1"}<span class="label label-primary">正常</span>{else/}<span class="label label-default">待审</span>{/if}</a></td>
+                    <td>
+                        <a href = "">
+                            <a class="label label-primary" href = "{:url('admin/goods/detail',['goodsId'=>$vo.id])}"><i class = "glyphicon glyphicon-edit"></i>&nbsp;查看</a>
+                        </a>
+                        <a href = "javascript:void(0);" >
+                            <span class="label label-danger" onclick = "status({$vo['id']},'-1')"><i class = "glyphicon glyphicon-remove"></i>&nbsp;删除</span>
+                        </a>
+                    </td>
+
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>$changeStatusUrl = "{:url('goods/status')}";</script>
+<script src="__STATIC__/admin/js/bootstrap.js"> </script>
+<script src="__STATIC__/admin/js/common.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/admin/datetimepicker/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/admin/datetimepicker/datepicker-zh_cn.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/datetimepicker/time/jquery-ui-timepicker-addon.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/datetimepicker/time/i18n/jquery-ui-timepicker-addon-i18n.min.js"></script>
+<script>
+    /*时间插件配置*/
+    $.timepicker.setDefaults($.timepicker.regional['zh-CN']);
+    $(".time").datetimepicker({ dateFormat: "yy-mm-dd" });
+
+    /*********异步搜索**********/
+    function searchRes(){
+        $allData = $('form').serialize();
+        $.ajax({
+            url:"{:url('admin/goods/search')}",
+            type:"post",
+            dateType:"json",
+            data:$allData,
+            success:function(res){
+                alert(res);
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,47 +1,37 @@
 <div class=" sidebar" role="navigation">
     <div class="navbar-collapse">
-        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1" style = "background: #2f2f2f;">
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1" style = "background: #222;">
             <ul class="nav" id="side-menu">
                 <li>
                     <a href="index.html" class="active"><i class="fa fa-home nav_icon"></i>主控制台</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-cogs nav_icon"></i>分类管理 <span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-cogs nav_icon"></i>门店管理 <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="{:url('cate/index')}">分类列表</a>
+                            <a href="{:url('store/index')}">门店列表</a>
                         </li>
                         <li>
-                            <a href="{:url('cate/add')}">添加分类</a>
+                            <a href="{:url('store/add')}">新增门店</a>
                         </li>
                     </ul>
                     <!-- /nav-second-level -->
                 </li>
                 <li class="">
-                    <a href="#"><i class="fa fa-book nav_icon"></i>城市管理<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-book nav_icon"></i>团购管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="{:url('city/index')}">城市列表</a>
+                            <a href="{:url('goods/index')}">团购列表</a>
                         </li>
                         <li>
-                            <a href="{:url('city/add')}">添加城市</a>
+                            <a href="{:url('goods/add')}">新增团购商品</a>
                         </li>
                     </ul>
                     <!-- /nav-second-level -->
                 </li>
 
-                <li>
-                    <a href="#"><i class="fa fa-envelope nav_icon"></i>商户管理<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="{:url('admin/bis/apply')}">商户入驻申请 </a>
-                        </li>
-                        <li>
-                            <a href="{:url('admin/bis/index')}">商户列表</a>
-                        </li>
-                    </ul>
-                    <!-- //nav-second-level -->
-                </li>
+
+
 
             </ul>
             <!-- //sidebar-collapse -->

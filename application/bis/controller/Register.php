@@ -98,6 +98,8 @@ class Register extends Controller
             if($bisres && $locationres && $accountres){
                 $url = request()->domain().url('bis/register/checking',['id'=>$bisres]);
 
+
+
                 \phpmailer\phpmailer\Email::sendmail('s15838257347@126.com','B2B商户入驻申请通知','您申请的入驻B2B商户正在审核，请点击<a href = "'.$url.'" target="_blank">查看链接</a>查看审核状态');
                 $this->success('申请成功',url('bis/register/checking',['id'=>$bisres]));
             }else{

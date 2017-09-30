@@ -1,16 +1,13 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
 use think\Loader;
-class Cate extends Controller
+class Cate extends Base
 {
     //分类----列表
     public function index()
     {
         header("Content-type: text/html; charset=utf-8");
         //获取分类数据
-
-
         $cateData = model('Cate')->getTree();
         $this->assign('cateData',$cateData);
 
@@ -104,15 +101,4 @@ class Cate extends Controller
 
     }
 
-    //修改状态
-    public function status(){
-        $data = input('post.');
-
-       $res = model('Cate')->update(['id' => $data['cid'], 'status' => $data['status']]);
-       if($res){
-           $this->result(['code'=>1,'msg'=>'操作成功']);
-       }else{
-           $this->result(['code'=>-1,'msg'=>'操作失败']);
-       }
-    }
 }
